@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Notatnik</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+<!--         Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+    </head>
+    <body>
+       
+        <div class="container">
+            <div class="row mt-1">
+                <div class="col text-center">
+                    <form action="#" th:action="@{/add}" method="post" th:object="${note}"> 
+                        <div><h1 class="text-center">NOTATKA</h1></div>
+                        <input type="text" th:field="*{temat}" placeholder="temat"/><br><br>
+                        <textarea th:field="*{description}" rows="8" cols="70" placeholder="Wpisz notatke"></textarea><br>
+                        <input  type="submit" value="Zapisz" />
+                    </form>
+                </div>
+
+
+                <div class="col border-start">
+                    <h1 class="text-center">Moje notatki</h1>
+                    <div th:each="note: ${notes}">
+                        <div>
+                            <h5 th:text="${note.temat}">Temat</h5>
+                            <h6 th:text="${note.description}">description</h6>
+                        </div>
+                        
+                        <a th:href="'/delete?id=' + ${note.id}" class="btn btn-danger">Usuń</a>                        
+                        <hr>
+
+                    </div> 
+                </div>
+            </div>
+        </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+
+    </body>
+</html>
